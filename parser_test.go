@@ -1,4 +1,4 @@
-package reader
+package main
 
 import (
 	"strings"
@@ -7,12 +7,11 @@ import (
 
 func TestParser(t *testing.T) {
 	src := ``
-	p := newRuvParser(strings.NewReader(src))
+	p := newGleParser(strings.NewReader(src))
 	forms := make([]any, 0)
 	exp := []any{}
 	for {
 		form, ok, err := p.nextForm()
-		println(form, ok, err)
 		if err != nil {
 			t.Fatal(err)
 		}

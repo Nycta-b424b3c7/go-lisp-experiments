@@ -1,7 +1,6 @@
-package reader
+package main
 
 import (
-	. "gle/data"
 	"regexp"
 	"strings"
 )
@@ -25,7 +24,7 @@ func parseSymbol(tok string) (Symbol, error) {
 		name = "/"
 	} else if strings.ContainsRune(tok, '/') {
 		parts := strings.SplitN(tok, "/", 2)
-		ns, name = parts[1], parts[2]
+		ns, name = parts[0], parts[1]
 		if len(ns) == 0 {
 			err = InvalidSymbol{Sym: tok}
 		}

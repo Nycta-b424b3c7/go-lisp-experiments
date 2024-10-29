@@ -1,8 +1,7 @@
-package data
+package main
 
 import (
 	"fmt"
-	. "gle/etc"
 )
 
 type InvalidKeyword struct {

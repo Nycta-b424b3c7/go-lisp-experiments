@@ -1,4 +1,4 @@
-package etc
+package main
 
 import (
 	"fmt"
@@ -19,7 +19,7 @@ func prStr1(val any) string {
 	return fmt.Sprintf("%#v", val)
 }
 
-func PrStr(xs ...any) string {
+func prStr(xs ...any) string {
 	strs := make([]string, 0)
 	for _, x := range xs {
 		strs = append(strs, prStr1(x))
@@ -32,7 +32,7 @@ func str1(val any) string {
 	if val == nil {
 		return "nil"
 	}
-	return fmt.Sprintf("%v", val)
+	return fmt.Sprintf("%#v", val)
 }
 
 func Str(xs ...any) string {
@@ -43,10 +43,10 @@ func Str(xs ...any) string {
 	return b.String()
 }
 
-func Pr(xs ...any) {
-	print(PrStr(xs...))
+func pr(xs ...any) {
+	print(prStr(xs...))
 }
 
-func Prn(xs ...any) {
-	println(PrStr(xs...))
+func prn(xs ...any) {
+	println(prStr(xs...))
 }

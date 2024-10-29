@@ -1,14 +1,13 @@
-package rt
+package main
 
 import (
-	. "gle/data"
 	"testing"
 )
 
 func TestFn(t *testing.T) {
 	rt := NewRt()
 
-	rt.vars["="] = &variable{HostFunc{func(args ...any) (any, error) {
+	rt.vars["="] = &variable{true, HostFunc{func(args ...any) (any, error) {
 		if len(args) < 1 {
 			return nil, WrongArity{"=", len(args), "at least 1"}
 		}
@@ -22,7 +21,7 @@ func TestFn(t *testing.T) {
 		return true, nil
 	}}}
 
-	rt.vars["mod"] = &variable{HostFunc{func(args ...any) (any, error) {
+	rt.vars["mod"] = &variable{true, HostFunc{func(args ...any) (any, error) {
 		if len(args) != 2 {
 			return nil, WrongArity{"mod", len(args), 2}
 		}

@@ -1,9 +1,7 @@
-package rt
+package main
 
 import (
 	"fmt"
-	. "gle/data"
-	. "gle/etc"
 )
 
 type NotResolved struct {
@@ -16,21 +14,21 @@ func (e NotResolved) Error() string {
 
 type Ctx struct {
 	rt    *Rt
-	prev  *Ctx
+	outer *Ctx
 	binds map[string]any
 }
 
-func (c *Ctx) Resolve(s Symbol) (any, bool) {
+func (c *Ctx) Resolve(s Symbol) (*variable, bool) {
 	rt := c.rt
 	k := s.Repr()
 	for c != nil {
 		if v, ok := c.binds[k]; ok {
-			return v, true
+			return &variable{true, v}, true
 		}
-		c = c.prev
+		c = c.outer
 	}
 	if v, ok := rt.vars[k]; ok {
-		return v.value, true
+		return v, true
 	}
 	return nil, false
 }
@@ -43,32 +41,32 @@ func (c *Ctx) EvalList(l List) (any, error) {
 	if l.Count() == 0 {
 		return EMPTY_LIST, nil
 	}
+
 	first := l.First()
 	v1, err := c.Eval(first)
-	if v1 == nil {
-		return nil, InvalidState{Msg: "can't call nil"}
-	}
+
 	if err != nil {
 		return nil, err
 	}
+	if v1 == nil {
+		return nil, InvalidState{Msg: "can't call nil"}
+	}
 	if ma, ok := v1.(MetaApply); ok {
-		return ma.MetaApply(c, l.Rest())
+		return ma.MetaApply(c, l.Rest().ToSlice())
 	}
 	return nil, InvalidState{Msg: "can't invoke " + Str(v1)}
 }
 
 func (c *Ctx) Eval(form any) (any, error) {
-	// fmt.Printf("eval %s\n", Str(form))
 	if l, ok := form.(List); ok {
 		r, err := c.EvalList(l)
-		// fmt.Printf(" => %s (%v)\n", Str(r), err)
 		return r, err
 	}
 	if s, ok := form.(Symbol); ok {
 		if v, ok := c.Resolve(s); ok {
-			// fmt.Printf(" => %s\n", Str(v))
-			return v, nil
+			return v.Deref()
 		}
+
 		return nil, NotResolved{s}
 	}
 	return form, nil

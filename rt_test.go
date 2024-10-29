@@ -1,4 +1,4 @@
-package rt
+package main
 
 import "testing"
 

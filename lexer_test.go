@@ -1,9 +1,25 @@
-package reader
+package main
 
 import (
+	"slices"
 	"strings"
 	"testing"
 )
+
+func TestLexerEmpty(t *testing.T) {
+	src := ""
+	exp := []string{}
+	l := newLexer(strings.NewReader(src))
+	ts := make([]string, 0)
+	go l.read()
+	for t := range l.tokens {
+		ts = append(ts, t)
+	}
+
+	if !slices.Equal(ts, exp) {
+		t.Fail()
+	}
+}
 
 func TestLexer1(t *testing.T) {
 	src := "(asd (qwe zxc))"

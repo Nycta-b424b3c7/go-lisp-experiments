@@ -1,8 +1,6 @@
-package reader
+package main
 
 import (
-	. "gle/data"
-	. "gle/etc"
 	"io"
 	"strconv"
 	"strings"
@@ -12,7 +10,7 @@ type gleParser struct {
 	l *lexer
 }
 
-func newRuvParser(r io.Reader) *gleParser {
+func newGleParser(r io.Reader) *gleParser {
 	l := newLexer(r)
 	go l.read()
 	return &gleParser{l}
@@ -89,16 +87,16 @@ type ReadResult struct {
 
 func Read(r io.Reader) ([]any, error) {
 	forms := make([]any, 0)
-	r1 := newRuvParser(r)
+	r1 := newGleParser(r)
 	for {
 		form, ok, err := r1.nextForm()
 		if err != nil {
 			return nil, err
-		}
-		if ok {
+		} else if ok {
 			forms = append(forms, form)
+		} else {
+			break
 		}
-		break
 	}
 	return forms, nil
 }
