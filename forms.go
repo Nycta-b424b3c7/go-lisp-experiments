@@ -31,7 +31,7 @@ var DECLARE_FORM = Form{func(c *Ctx, args []any) (any, error) {
 	if !ok {
 		return nil, WrongType{"declare", first, "symbol"}
 	}
-	k := sym.Repr()
+	k := str(sym)
 	v, ok := c.rt.vars[k]
 	if !ok {
 		v = &variable{}
@@ -57,7 +57,7 @@ var DEFINE_FORM = Form{func(c *Ctx, args []any) (any, error) {
 			return nil, err
 		}
 
-		c.rt.Define(sym.Repr(), value)
+		c.rt.Define(str(sym), value)
 		return nil, nil
 	}
 
@@ -78,14 +78,14 @@ var DEFINE_FORM = Form{func(c *Ctx, args []any) (any, error) {
 				return nil, WrongType{"define", argNameValue, "symbol"}
 			}
 
-			argName := sym.Repr()
+			argName := str(sym)
 			argNames = append(argNames, argName)
 			argNamesList = argNamesList.Rest()
 		}
 
 		body := ListFromSlice(args[1:]).Cons(Symbol{Ns: "", Name: "do"})
 		fn := Function{c, argNames, body}
-		c.rt.Define(fnName.Repr(), fn)
+		c.rt.Define(str(fnName), fn)
 		return nil, nil
 	}
 
@@ -146,7 +146,7 @@ var LET_FORM = Form{func(c *Ctx, args []any) (any, error) {
 		if err != nil {
 			return nil, err
 		}
-		bindsMap[ks.Repr()] = ve
+		bindsMap[str(ks)] = ve
 		restBinds = restBinds.Rest()
 	}
 
@@ -178,7 +178,7 @@ var LAMBDA_FORM = Form{func(c *Ctx, args []any) (any, error) {
 			return nil, WrongType{"lambda", argNameValue, "symbol"}
 		}
 
-		argName := sym.Repr()
+		argName := str(sym)
 		argNames = append(argNames, argName)
 		argNamesList = argNamesList.Rest()
 	}

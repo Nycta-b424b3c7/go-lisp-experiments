@@ -90,12 +90,12 @@ func (l List) Eq(other any) bool {
 	return seqEq(l.seq, o.seq)
 }
 
-func (l List) Repr() string {
+func (l List) String() string {
 	var b strings.Builder
 	b.WriteRune('(')
 	s := l.seq
 	for s != nil {
-		b.WriteString(prStr(First(s)))
+		b.WriteString(str(First(s)))
 		s = Rest(s)
 		if s != nil {
 			b.WriteRune(' ')
@@ -103,10 +103,6 @@ func (l List) Repr() string {
 	}
 	b.WriteRune(')')
 	return b.String()
-}
-
-func (l List) String() string {
-	return l.Repr()
 }
 
 func Reduce[T any](f func(T, any) T, init T, l List) T {

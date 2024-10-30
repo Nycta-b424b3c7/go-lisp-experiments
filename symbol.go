@@ -16,14 +16,10 @@ type Symbol struct {
 	Ns, Name string
 }
 
-func (s Symbol) Repr() string {
+func (s Symbol) String() string {
 	if len(s.Ns) > 0 {
 		return s.Ns + "/" + s.Name
 	} else {
 		return s.Name
 	}
-}
-
-func (s Symbol) String() string {
-	return s.Repr()
 }

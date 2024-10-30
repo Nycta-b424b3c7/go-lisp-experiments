@@ -9,7 +9,7 @@ type NotResolved struct {
 }
 
 func (e NotResolved) Error() string {
-	return fmt.Sprintf("not resolved: " + e.Symbol.String())
+	return fmt.Sprintf("not resolved: " + str(e.Symbol))
 }
 
 type Ctx struct {
@@ -20,7 +20,7 @@ type Ctx struct {
 
 func (c *Ctx) Resolve(s Symbol) (*variable, bool) {
 	rt := c.rt
-	k := s.Repr()
+	k := str(s)
 	for c != nil {
 		if v, ok := c.binds[k]; ok {
 			return &variable{true, v}, true
@@ -54,7 +54,7 @@ func (c *Ctx) EvalList(l List) (any, error) {
 	if ma, ok := v1.(MetaApply); ok {
 		return ma.MetaApply(c, l.Rest().ToSlice())
 	}
-	return nil, InvalidState{Msg: "can't invoke " + Str(v1)}
+	return nil, InvalidState{Msg: "can't invoke " + str(v1)}
 }
 
 func (c *Ctx) Eval(form any) (any, error) {

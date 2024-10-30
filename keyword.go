@@ -16,10 +16,6 @@ type Keyword struct {
 	Sym *Symbol
 }
 
-func (k Keyword) Repr() string {
-    return ":" + k.Sym.Repr()
-}
-
 func (k Keyword) String() string {
-	return k.Repr()
+	return ":" + str(k.Sym)
 }
