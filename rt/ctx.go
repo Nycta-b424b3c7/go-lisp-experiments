@@ -2,8 +2,7 @@ package rt
 
 import (
 	"fmt"
-    . "gle/data"
-    . "gle/etc"
+	. "gle/data"
 )
 
 type NotResolved struct {

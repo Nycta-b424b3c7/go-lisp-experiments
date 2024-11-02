@@ -8,17 +8,18 @@ import (
 )
 
 var coreBinds = map[string]any{
+	"comment": COMMENT_FORM,
 	"declare": DECLARE_FORM,
 	"define":  DEFINE_FORM,
 	"if":      IF_FORM,
 	"do":      DO_FORM,
 	"let":     LET_FORM,
 	"lambda":  LAMBDA_FORM,
-    "str":     STR_FORM,
+	"str":     STR_FORM,
 
 	"+":   PLUS_FN,
-    "-":   MINUS_FN,
-    "<":   LT_FN,
+	"-":   MINUS_FN,
+	"<":   LT_FN,
 	"prn": PRN_FN,
 }
 

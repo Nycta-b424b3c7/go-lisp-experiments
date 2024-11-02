@@ -25,6 +25,10 @@ func doForms(c *Ctx, forms List) (any, error) {
 	return res, err
 }
 
+var COMMENT_FORM = Form{func(c *Ctx, args []any) (any, error) {
+	return nil, nil
+}}
+
 var DECLARE_FORM = Form{func(c *Ctx, args []any) (any, error) {
 	arity := len(args)
 	if arity != 1 {
@@ -192,5 +196,5 @@ var LAMBDA_FORM = Form{func(c *Ctx, args []any) (any, error) {
 }}
 
 var STR_FORM = Form{func(c *Ctx, args []any) (any, error) {
-    return Str(args...), nil
+	return Str(args...), nil
 }}

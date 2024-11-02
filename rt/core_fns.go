@@ -32,33 +32,33 @@ var LT_FN = HostFunc{func(args ...any) (any, error) {
 
 	var last float64
 
-    var f float64
-    if i, ok := args[0].(int); ok {
-        f = float64(i)
-    } else if f, ok := args[0].(float64); ok {
-        last = f
-    } else {
-        return nil, WrongType{"<", args[0], "int/float64"}
-    }
+	var f float64
+	if i, ok := args[0].(int); ok {
+		f = float64(i)
+	} else if f, ok := args[0].(float64); ok {
+		last = f
+	} else {
+		return nil, WrongType{"<", args[0], "int/float64"}
+	}
 
-    last = f
+	last = f
 
-    for _, arg := range args[1:] {
+	for _, arg := range args[1:] {
 		if i, ok := arg.(int); ok {
-            f = float64(i)
+			f = float64(i)
 		} else if f2, ok := arg.(float64); ok {
 			f = f2
 		} else {
 			return nil, WrongType{"+", arg, "int/float64"}
 		}
 
-        if last > f {
-            last = f
-            continue
-        } else {
-            return false, nil
-        }
-    }
+		if last > f {
+			last = f
+			continue
+		} else {
+			return false, nil
+		}
+	}
 
 	return true, nil
 }}
@@ -70,8 +70,8 @@ var MINUS_FN = HostFunc{func(args ...any) (any, error) {
 
 	var res any = args[0]
 
-    for i := 1; i < len(args); i++ {
-        arg := args[i]
+	for i := 1; i < len(args); i++ {
+		arg := args[i]
 		if i, ok := arg.(int); ok {
 			res = res.(int) - i
 		} else if f, ok := arg.(float64); ok {

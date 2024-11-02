@@ -12,4 +12,3 @@ func (v *variable) Deref() (any, error) {
 		return nil, NOT_BOUND
 	}
 }
-

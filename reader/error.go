@@ -17,4 +17,3 @@ type UnexpectedToken struct {
 func (e UnexpectedToken) Error() string {
 	return fmt.Sprintf("UnexpectedToken: %s", e.tok)
 }
-

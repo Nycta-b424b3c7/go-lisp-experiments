@@ -1,11 +1,10 @@
 package reader
 
 import (
+	. "gle/data"
 	"io"
 	"strconv"
 	"strings"
-    . "gle/etc"
-    . "gle/data"
 )
 
 type gleParser struct {
@@ -21,7 +20,7 @@ func newGleParser(r io.Reader) *gleParser {
 func inferAtom(tok string) (any, error) {
 	btok := []byte(tok)
 	if len(tok) == 0 {
-		return nil, InvalidState{Msg: "inferAtom / len(tok) == 0"}
+		panic("inferAtom / len(tok) == 0")
 	} else if tok == "nil" {
 		return nil, nil
 	} else if tok == "true" {

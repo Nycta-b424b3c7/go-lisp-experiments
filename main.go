@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-    var mainFile string
+	var mainFile string
 	flag.StringVar(&mainFile, "main", "", "main file")
 	args := flag.CommandLine.Args()
 	flag.Parse()

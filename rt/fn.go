@@ -1,7 +1,7 @@
 package rt
 
 import (
-    . "gle/data"
+	. "gle/data"
 )
 
 type HostFunc struct {

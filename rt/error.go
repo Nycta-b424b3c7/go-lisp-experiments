@@ -51,3 +51,10 @@ func (e WrongArity) Error() string {
 	return fmt.Sprintf("wrong arity given to %v: got %v, expected %v", e.Name, e.Got, e.Expected)
 }
 
+type InvalidState struct {
+	Msg string
+}
+
+func (e InvalidState) Error() string {
+	return fmt.Sprintf("invalid state: %s", e.Msg)
+}

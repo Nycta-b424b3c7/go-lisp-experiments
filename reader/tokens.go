@@ -1,9 +1,9 @@
 package reader
 
 import (
+	. "gle/data"
 	"regexp"
 	"strings"
-    . "gle/data"
 )
 
 func re(s string) *regexp.Regexp {
