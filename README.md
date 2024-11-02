@@ -8,3 +8,8 @@ an exercise in creating lisp using Go programming language
 ```sh
 GLE_PATH=_examples/ go run . -main hello-world
 ```
+
+### Fibonacci sequence
+```sh
+GLE_PATH=_examples/ go run . -main fib
+```
