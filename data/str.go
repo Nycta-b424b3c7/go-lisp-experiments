@@ -12,10 +12,10 @@ func str1(val any) string {
 	return fmt.Sprintf("%+v", val)
 }
 
-func Str(xs ...any) string {
-	var b strings.Builder
-	for _, x := range xs {
-		b.WriteString(str1(x))
+func Str(values ...any) string {
+	var strs []string
+	for _, v := range values {
+        strs = append(strs, str1(v))
 	}
-	return b.String()
+	return strings.Join(strs, " ")
 }

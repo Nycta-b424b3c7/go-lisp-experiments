@@ -6,5 +6,5 @@ an exercise in creating lisp using Go programming language
 
 ### primitive hello world
 ```sh
-GLE_PATH=examples/ go run . -main hello-world
+GLE_PATH=_examples/ go run . -main hello-world
 ```

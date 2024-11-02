@@ -14,22 +14,12 @@ var coreBinds = map[string]any{
 	"do":      DO_FORM,
 	"let":     LET_FORM,
 	"lambda":  LAMBDA_FORM,
+    "str":     STR_FORM,
 
 	"+":   PLUS_FN,
+    "-":   MINUS_FN,
+    "<":   LT_FN,
 	"prn": PRN_FN,
-}
-
-type variable struct {
-	bound bool
-	value any
-}
-
-func (v *variable) Deref() (any, error) {
-	if v.bound {
-		return v.value, nil
-	} else {
-		return nil, NOT_BOUND
-	}
 }
 
 func getPath() []string {

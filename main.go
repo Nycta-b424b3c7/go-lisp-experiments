@@ -6,16 +6,16 @@ import (
 )
 
 func main() {
-
-	mainFile := flag.String("main", "", "main file")
+    var mainFile string
+	flag.StringVar(&mainFile, "main", "", "main file")
 	args := flag.CommandLine.Args()
 	flag.Parse()
 
-	if mainFile == nil {
+	if mainFile == "" {
 		panic("no main file provided")
 	}
 
-	err := rt.RunMain(*mainFile, args)
+	err := rt.RunMain(mainFile, args)
 
 	if err != nil {
 		panic(err)

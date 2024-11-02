@@ -1,7 +1,7 @@
 package rt
 
 import (
-    . "gle/data"
+	. "gle/data"
 )
 
 type Form struct {
@@ -189,4 +189,8 @@ var LAMBDA_FORM = Form{func(c *Ctx, args []any) (any, error) {
 
 	body := ListFromSlice(args[1:]).Cons(Symbol{Ns: "", Name: "do"})
 	return Function{c, argNames, body}, nil
+}}
+
+var STR_FORM = Form{func(c *Ctx, args []any) (any, error) {
+    return Str(args...), nil
 }}

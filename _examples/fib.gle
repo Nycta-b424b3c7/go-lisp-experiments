@@ -1,0 +1,11 @@
+
+(define (fib x)
+  (if (< 1 x)
+    1
+    (+ (fib (- x 1))
+       (fib (- x 2)))))
+
+(define (fib/main args)
+  (prn (fib 10)))
+
+;; vim: filetype=scheme
