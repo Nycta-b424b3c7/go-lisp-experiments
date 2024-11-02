@@ -1,4 +1,8 @@
-package main
+package rt
+
+import (
+    . "gle/data"
+)
 
 type Form struct {
 	fn func(*Ctx, []any) (any, error)
@@ -31,7 +35,7 @@ var DECLARE_FORM = Form{func(c *Ctx, args []any) (any, error) {
 	if !ok {
 		return nil, WrongType{"declare", first, "symbol"}
 	}
-	k := str(sym)
+	k := Str(sym)
 	v, ok := c.rt.vars[k]
 	if !ok {
 		v = &variable{}
@@ -57,7 +61,7 @@ var DEFINE_FORM = Form{func(c *Ctx, args []any) (any, error) {
 			return nil, err
 		}
 
-		c.rt.Define(str(sym), value)
+		c.rt.Define(Str(sym), value)
 		return nil, nil
 	}
 
@@ -78,14 +82,14 @@ var DEFINE_FORM = Form{func(c *Ctx, args []any) (any, error) {
 				return nil, WrongType{"define", argNameValue, "symbol"}
 			}
 
-			argName := str(sym)
+			argName := Str(sym)
 			argNames = append(argNames, argName)
 			argNamesList = argNamesList.Rest()
 		}
 
 		body := ListFromSlice(args[1:]).Cons(Symbol{Ns: "", Name: "do"})
 		fn := Function{c, argNames, body}
-		c.rt.Define(str(fnName), fn)
+		c.rt.Define(Str(fnName), fn)
 		return nil, nil
 	}
 
@@ -146,7 +150,7 @@ var LET_FORM = Form{func(c *Ctx, args []any) (any, error) {
 		if err != nil {
 			return nil, err
 		}
-		bindsMap[str(ks)] = ve
+		bindsMap[Str(ks)] = ve
 		restBinds = restBinds.Rest()
 	}
 
@@ -178,7 +182,7 @@ var LAMBDA_FORM = Form{func(c *Ctx, args []any) (any, error) {
 			return nil, WrongType{"lambda", argNameValue, "symbol"}
 		}
 
-		argName := str(sym)
+		argName := Str(sym)
 		argNames = append(argNames, argName)
 		argNamesList = argNamesList.Rest()
 	}

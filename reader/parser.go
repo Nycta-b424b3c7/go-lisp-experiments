@@ -1,9 +1,11 @@
-package main
+package reader
 
 import (
 	"io"
 	"strconv"
 	"strings"
+    . "gle/etc"
+    . "gle/data"
 )
 
 type gleParser struct {

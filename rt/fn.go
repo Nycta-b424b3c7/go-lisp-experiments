@@ -1,4 +1,8 @@
-package main
+package rt
+
+import (
+    . "gle/data"
+)
 
 type HostFunc struct {
 	fn func(...any) (any, error)

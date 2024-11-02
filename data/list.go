@@ -1,4 +1,4 @@
-package main
+package data
 
 import (
 	"slices"
@@ -95,7 +95,7 @@ func (l List) String() string {
 	b.WriteRune('(')
 	s := l.seq
 	for s != nil {
-		b.WriteString(str(First(s)))
+		b.WriteString(Str(First(s)))
 		s = Rest(s)
 		if s != nil {
 			b.WriteRune(' ')

@@ -1,4 +1,4 @@
-package main
+package data
 
 type Seq interface {
 	Seq() Seq

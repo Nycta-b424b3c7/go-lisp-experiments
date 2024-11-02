@@ -1,4 +1,8 @@
-package main
+package rt
+
+import (
+    . "gle/data"
+)
 
 type MetaApply interface {
 	MetaApply(*Ctx, []any) (any, error)

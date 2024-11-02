@@ -1,7 +1,7 @@
-package main
+package rt
 
 var PRN_FN = HostFunc{func(args ...any) (any, error) {
-	prn(args...)
+	Prn(args...)
 	return nil, nil
 }}
 

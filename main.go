@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"gle/rt"
 )
 
 func main() {
@@ -14,7 +15,7 @@ func main() {
 		panic("no main file provided")
 	}
 
-	err := RunMain(*mainFile, args)
+	err := rt.RunMain(*mainFile, args)
 
 	if err != nil {
 		panic(err)

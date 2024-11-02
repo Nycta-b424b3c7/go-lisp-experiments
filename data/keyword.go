@@ -1,4 +1,4 @@
-package main
+package data
 
 import (
 	"fmt"
@@ -17,5 +17,5 @@ type Keyword struct {
 }
 
 func (k Keyword) String() string {
-	return ":" + str(k.Sym)
+	return ":" + Str(k.Sym)
 }

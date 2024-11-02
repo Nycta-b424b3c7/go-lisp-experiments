@@ -1,4 +1,4 @@
-package main
+package data
 
 type Memo[T any] struct {
 	hasValue bool

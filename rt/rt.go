@@ -1,6 +1,7 @@
-package main
+package rt
 
 import (
+	"gle/reader"
 	"os"
 	"path"
 	"strings"
@@ -74,7 +75,7 @@ func (rt *Rt) Eval(form any) (any, error) {
 }
 
 func (rt *Rt) evalStr(s string) (any, error) {
-	f, err := ReadString(s)
+	f, err := reader.ReadString(s)
 	if err != nil {
 		return nil, err
 	}
@@ -108,7 +109,7 @@ func (rt *Rt) load(file string) error {
 			break
 		}
 
-		forms, err = Read(f)
+		forms, err = reader.Read(f)
 		break
 	}
 
@@ -117,7 +118,7 @@ func (rt *Rt) load(file string) error {
 	}
 
 	if forms == nil {
-		return LoadError{file, rt.path}
+		return LoadError{FileName: file, Path: rt.path}
 	}
 
 	for _, f := range forms {
