@@ -6,7 +6,7 @@ func TestDef(t *testing.T) {
 	rt := NewRt()
 	var r any
 	var err error
-	r, err = rt.evalStr(`(def x 1)`)
+	r, err = rt.evalStr(`(define x 1)`)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -22,7 +22,7 @@ func TestDef(t *testing.T) {
 		t.FailNow()
 	}
 
-	r, err = rt.evalStr(`(def x 2)`)
+	r, err = rt.evalStr(`(define x 2)`)
 	if err != nil {
 		t.Fatal(err)
 	}

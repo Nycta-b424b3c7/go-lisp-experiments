@@ -50,7 +50,7 @@ func (c *Ctx) EvalList(l List) (any, error) {
 		return nil, err
 	}
 	if v1 == nil {
-		return nil, InvalidState{Msg: "can't call nil"}
+		return nil, InvalidState{Msg: "can't invoke nil"}
 	}
 	if ma, ok := v1.(MetaApply); ok {
 		return ma.MetaApply(c, l.Rest().ToSlice())
@@ -59,16 +59,16 @@ func (c *Ctx) EvalList(l List) (any, error) {
 }
 
 func (c *Ctx) Eval(form any) (any, error) {
-	if l, ok := form.(List); ok {
-		r, err := c.EvalList(l)
-		return r, err
-	}
 	if s, ok := form.(Symbol); ok {
 		if v, ok := c.Resolve(s); ok {
 			return v.Deref()
 		}
 
 		return nil, NotResolved{s}
+	}
+	if l, ok := form.(List); ok {
+		r, err := c.EvalList(l)
+		return r, err
 	}
 	return form, nil
 }

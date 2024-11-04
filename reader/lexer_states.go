@@ -55,28 +55,6 @@ func readAtom(l *lexer) lexerState {
 	return lexerSwitch
 }
 
-func lexerSwitch(l *lexer) lexerState {
-	r := l.reader
-	ts := l.tokens
-	c, ok := next(r)
-	if !ok {
-		return nil
-	} else if c == '(' {
-		ts <- "("
-		return lexerSwitch
-	} else if c == ')' {
-		ts <- ")"
-		return lexerSwitch
-	} else if unicode.IsSpace(c) {
-		return skipWhitespace
-	} else if c == ';' {
-		return skipComment
-	} else {
-		back(r)
-		return readAtom
-	}
-}
-
 func skipWhitespace(l *lexer) lexerState {
 	r := l.reader
 	for {
@@ -110,4 +88,30 @@ func skipComment(l *lexer) lexerState {
 		}
 	}
 	return lexerSwitch
+}
+
+func lexerSwitch(l *lexer) lexerState {
+	r := l.reader
+	ts := l.tokens
+	c, ok := next(r)
+	if !ok {
+		return nil
+	}
+	if c == '(' {
+		ts <- "("
+		return lexerSwitch
+	}
+	if c == ')' {
+		ts <- ")"
+		return lexerSwitch
+	}
+	if unicode.IsSpace(c) {
+		return skipWhitespace
+	}
+	if c == ';' {
+		return skipComment
+	}
+
+	back(r)
+	return readAtom
 }

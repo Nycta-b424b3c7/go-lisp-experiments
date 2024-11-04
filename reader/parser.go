@@ -21,23 +21,29 @@ func inferAtom(tok string) (any, error) {
 	btok := []byte(tok)
 	if len(tok) == 0 {
 		panic("inferAtom / len(tok) == 0")
-	} else if tok == "nil" {
-		return nil, nil
-	} else if tok == "true" {
-		return true, nil
-	} else if tok == "false" {
-		return false, nil
-	} else if intRe.Match(btok) {
-		return strconv.Atoi(tok)
-	} else if hexRe.Match(btok) {
-		return strconv.ParseInt(tok, 16, 64)
-	} else if floatRe.Match(btok) {
-		return strconv.ParseFloat(tok, 64)
-	} else if tok[0] == ':' && len(tok) > 1 {
-		return parseKeyword(tok)
-	} else {
-		return parseSymbol(tok)
 	}
+	if tok == "nil" {
+		return nil, nil
+	}
+	if tok == "true" {
+		return true, nil
+	}
+	if tok == "false" {
+		return false, nil
+	}
+	if intRe.Match(btok) {
+		return strconv.Atoi(tok)
+	}
+	if hexRe.Match(btok) {
+		return strconv.ParseInt(tok, 16, 64)
+	}
+	if floatRe.Match(btok) {
+		return strconv.ParseFloat(tok, 64)
+	}
+	if tok[0] == ':' && len(tok) > 1 {
+		return parseKeyword(tok)
+	}
+	return parseSymbol(tok)
 }
 
 func (r *gleParser) nextList() (List, bool, error) {

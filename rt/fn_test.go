@@ -1,6 +1,7 @@
 package rt
 
 import (
+	. "gle/data"
 	"testing"
 )
 
@@ -44,7 +45,7 @@ func TestFn(t *testing.T) {
 	}}}
 
 	_, err := rt.evalStr(`
-        (def even? (fn (x) (= 0 (mod x 2)))))
+        (define even? (lambda (x) (= 0 (mod x 2))))
         `)
 	if err != nil {
 		t.Log("fail 1")
