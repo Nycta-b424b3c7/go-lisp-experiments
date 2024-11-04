@@ -8,5 +8,4 @@
 (define (fib/main args)
   (prn (fib 10)))
 
-(comment vim: filetype=scheme
-         )
+;; vim: filetype=scheme

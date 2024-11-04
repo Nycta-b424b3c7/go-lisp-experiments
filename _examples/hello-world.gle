@@ -2,5 +2,4 @@
 (define (hello-world/main args)
   (prn (str hello world!)))
 
-(comment vim: filetype=scheme
-         )
+;; vim: filetype=scheme

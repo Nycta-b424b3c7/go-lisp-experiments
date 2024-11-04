@@ -69,6 +69,8 @@ func lexerSwitch(l *lexer) lexerState {
 		return lexerSwitch
 	} else if unicode.IsSpace(c) {
 		return skipWhitespace
+	} else if c == ';' {
+		return skipComment
 	} else {
 		back(r)
 		return readAtom
@@ -87,6 +89,23 @@ func skipWhitespace(l *lexer) lexerState {
 		}
 		if !unicode.IsSpace(c) {
 			back(r)
+			break
+		}
+	}
+	return lexerSwitch
+}
+
+func skipComment(l *lexer) lexerState {
+	r := l.reader
+	for {
+		c, _, err := r.ReadRune()
+		if err == io.EOF {
+			return nil
+		}
+		if err != nil {
+			panic(err)
+		}
+		if c == '\n' {
 			break
 		}
 	}
